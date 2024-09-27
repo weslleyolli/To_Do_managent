@@ -26,6 +26,12 @@ def complete_task(tasks, index_task):
     print(f"Task {index_task} completed.")
     return
 
+def delete_task_complete(tasks):
+    for task in tasks:
+        if task["completed"]:
+            tasks.remove(task)
+    print(f"The task completed was deleted.")
+    return
 
 tasks =  []
 while True:
@@ -54,6 +60,9 @@ while True:
         task_index = input("Enter index of task: ")
         complete_task(tasks, task_index)
 
+    elif choice == "5":
+        delete_task_complete(tasks)
+        view_tasks(tasks)
     elif choice == "6":
         break
 
