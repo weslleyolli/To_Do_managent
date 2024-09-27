@@ -18,7 +18,13 @@ def update_name_task(tasks, index_task, new_task_name):
         print(f"Task {index_task} updated to {new_task_name}")
     else:
         print(f"Task {index_task} not found.")
-        return
+    return
+
+def complete_task(tasks, index_task):
+    index_task_adjusted = int(index_task) - 1
+    tasks[index_task_adjusted]["completed"] = True
+    print(f"Task {index_task} completed.")
+    return
 
 
 tasks =  []
@@ -43,6 +49,10 @@ while True:
         task_index = input("Enter index of task: ")
         new_task_name = input("Enter new task name: ")
         update_name_task(tasks, task_index, new_task_name)
+    elif choice == "4":
+        view_tasks(tasks)
+        task_index = input("Enter index of task: ")
+        complete_task(tasks, task_index)
 
     elif choice == "6":
         break
