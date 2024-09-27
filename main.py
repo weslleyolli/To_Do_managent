@@ -12,8 +12,13 @@ def view_tasks(tasks):
     return
 
 def update_name_task(tasks, index_task, new_task_name):
-    print(f"Task {index_task} updated to {new_task_name}")
-    return
+    index_task_adjusted = int(index_task) - 1
+    if index_task_adjusted >= 0 and index_task_adjusted < len(tasks):
+        tasks[index_task_adjusted]["task"] = new_task_name
+        print(f"Task {index_task} updated to {new_task_name}")
+    else:
+        print(f"Task {index_task} not found.")
+        return
 
 
 tasks =  []
