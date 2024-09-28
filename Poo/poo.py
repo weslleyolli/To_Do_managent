@@ -72,3 +72,48 @@ account.deposit(100)
 print(account.view_balance())
 account.deposit(-100)
 print(account.view_balance())
+
+print("\n exemple of abstration")
+from abc import ABC, abstractmethod
+
+class vehicle:
+    @abstractmethod
+    def on(self):
+        pass
+
+    @abstractmethod
+    def off(self):
+        pass
+
+class Car(vehicle):
+    def __init__(self):
+        pass
+
+    def on(self):
+        return "Car is on"
+    def off(self):
+        return "Car is off"
+
+yellow_car = Car()
+print(yellow_car.on())
+print(yellow_car.off())
+
+#multiples herancas
+class Mamifero(Animal):
+    def amamentar(self):
+        return f"{self.name} is amamentar"
+
+class Bird(Animal):
+    def fly(self):
+        return f"{self.name} is flying"
+
+class Bat(Mamifero, Bird):
+    def sound(self):
+        return "Bat is sound"
+
+bat = Bat(name="Batman")
+
+print("\n Name: ", bat.name)
+print("Sound: ", bat.sound())
+print("Flying: ", bat.fly())
+print("amamentar: ", bat.amamentar())
