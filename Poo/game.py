@@ -14,7 +14,7 @@ class Character:
         return self.__level
 
     def show_details(self):
-        return f"Name: {self.get_name()}\n Life: {self.get_life()}\n Level: {self.get_level()}"
+        return f" Name: {self.get_name()}\n Life: {self.get_life()}\n Level: {self.get_level()}"
 
 class Hero(Character):
     def __init__(self, name, life, level, ability):
@@ -38,7 +38,22 @@ class Villain(Character):
     def show_details(self):
         return f"{super().show_details()}\n Type: {self.get_type()}\n"
 
-hero = Hero(name="Spiderman", life=100, level=5, ability="shoot webs")
-print(hero.show_details())
-villain =Villain(name="green elf", life=80, level=3, type="fly")
-print(villain.show_details())
+class Game():
+    def __init__(self):
+        self.hero = Hero(name="Spiderman", life=100, level=5, ability="shoot webs")
+        self.villain = Villain(name="green elf", life=80, level=3, type="fly")
+
+    def init_battle(self):
+        print("Starting battle!")
+        while self.hero.get_life() > 0 and self.villain.get_life() > 0:
+            print("\nCharacter details:")
+            print(self.hero.show_details())
+            print(self.villain.show_details())
+
+            input("Press enter to attack...")
+            choice = input("Choice (1- normal attack, 2- especial attack):")
+
+
+# CREATE INSTANCE AND START THE BATTLE
+game = Game()
+game.init_battle()
