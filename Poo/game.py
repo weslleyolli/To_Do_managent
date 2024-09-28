@@ -24,10 +24,10 @@ class Character:
             self.__life = 0
 
     def attack(self, target):
-        dano_base = random.randint(10, 20)
-        dano_total = dano_base * (1 + self.__level * 0.1)
+        dano_base = random.randint(5, 15)
+        dano_total = int(dano_base * (1 + self.__level * 0.05))
         target.suffer_attack(dano_total)
-        print(f"{self.__name} atacou {target.get_name()} causando {dano_total:.2f} de dano!")
+        print(f"\n{self.__name} attacked {target.get_name()} causing {dano_total} of damage!")
 
 class Hero(Character):
     def __init__(self, name, life, level, ability):
@@ -39,6 +39,12 @@ class Hero(Character):
 
     def show_details(self):
         return f"{super().show_details()}\n Ability: {self.get_ability()}\n"
+
+    def especial_attack(self, target):
+        dano_base = random.randint(10, 20)
+        total_damage = int(dano_base * (1 + self.get_level() * 0.1))
+        target.suffer_attack(total_damage)
+        print(f"{self.get_name()} used the especial ability {self.get_ability()} in {target.get_name()} and dealt {total_damage}")
 
 class Villain(Character):
     def __init__(self, name, life, level, type):
@@ -68,8 +74,13 @@ class Game():
 
             if choice == "1":
                 self.hero.attack(self.villain)
+            elif choice == "2":
+                self.hero.especial_attack(self.villain)
             else:
                 print("choice invalid")
+
+            if self.villain.get_life() > 0:
+                self.villain.attack(self.hero)
 
         if self.hero.get_life() > 0:
             print("\ncongratulations, you win!")
