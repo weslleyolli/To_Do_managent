@@ -1,3 +1,5 @@
+import random
+
 class Character:
     def __init__(self, name, life, level):
         self.__name = name
@@ -15,6 +17,17 @@ class Character:
 
     def show_details(self):
         return f" Name: {self.get_name()}\n Life: {self.get_life()}\n Level: {self.get_level()}"
+
+    def suffer_attack(self, damage):
+        self.__life -= damage
+        if self.__life < 0:
+            self.__life = 0
+
+    def attack(self, target):
+        dano_base = random.randint(10, 20)
+        dano_total = dano_base * (1 + self.__level * 0.1)
+        target.suffer_attack(dano_total)
+        print(f"{self.__name} atacou {target.get_name()} causando {dano_total:.2f} de dano!")
 
 class Hero(Character):
     def __init__(self, name, life, level, ability):
@@ -52,6 +65,16 @@ class Game():
 
             input("Press enter to attack...")
             choice = input("Choice (1- normal attack, 2- especial attack):")
+
+            if choice == "1":
+                self.hero.attack(self.villain)
+            else:
+                print("choice invalid")
+
+        if self.hero.get_life() > 0:
+            print("\ncongratulations, you win!")
+        else:
+            print("\nyou lose!")
 
 
 # CREATE INSTANCE AND START THE BATTLE
